@@ -1,0 +1,70 @@
+label,
+p,
+input {
+  margin-bottom: 0;
+
+  &.right {
+    text-align: end !important;
+  }
+
+  &.center {
+    text-align: center !important;
+  }
+
+  &.sm {
+    font-size: 0.9rem;
+  }
+
+  &.lg {
+    font-size: 1.3rem;
+  }
+
+  &.light {
+    color: var(--text-light);
+  }
+
+  &.dark {
+    color: var(--text-dark);
+  }
+
+  &.primary {
+    color: var(--color-primary);
+  }
+
+  &.accent {
+    color: var(--color-accent);
+  }
+
+  &.warn {
+    color: var(--color-warn);
+  }
+
+  &.disabled {
+    color: var(--color-disabled);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-header);
+}
+
+label,
+p {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+p {
+  margin-bottom: 0;
+}
