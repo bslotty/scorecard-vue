@@ -4,6 +4,7 @@ import PlayerList from "./components/chunks/PlayerList.vue";
 import Dialog from "./components/core/Dialog.vue";
 
 import { usePlayerList } from "./stores/player.store";
+import type { Player } from "./models/Player";
 
 const $players = usePlayerList();
 </script>
@@ -14,7 +15,7 @@ const $players = usePlayerList();
     <div class="text-success">
       <hr class="border border-dark border-1 mt-0" />
     </div>
-    <PlayerList :players="$players.getList()" />
+    <PlayerList :players="($players.getList() as Player[])" />
   </div>
   <Dialog></Dialog>
 </template>

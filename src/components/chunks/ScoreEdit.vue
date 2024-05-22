@@ -17,7 +17,7 @@ let valid = ref(false);
 
 function save() {
   if (valid.value) {
-    props.player.updateScore(score.value, props.index);
+    props.player.updateScore(score.value as number, props.index);
     defaultScore = score.value;
     validate();
   }
@@ -29,7 +29,7 @@ function remove() {
 
 function validate() {
   let regex = new RegExp("[0-9\.]+", "gm");
-  let m = score.value.match(regex);
+  let m = (score.value as string).match(regex);
   valid.value = m !== null && score.value != defaultScore;
 }
 </script>

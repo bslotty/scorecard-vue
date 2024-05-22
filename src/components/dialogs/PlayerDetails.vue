@@ -29,7 +29,7 @@ function close() {
 
 function validate() {
   let regex = new RegExp("[\\w\\-\\.\\@ !#$%^+]+", "gm");
-    let m = name.value.match(regex);
+    let m = (name.value as string).match(regex);
     valid.value = m !== null && name.value != initialName;
 }
 
