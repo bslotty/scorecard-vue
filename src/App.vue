@@ -5,8 +5,10 @@ import Dialog from "./components/core/Dialog.vue";
 
 import { usePlayerList } from "./stores/player.store";
 import type { Player } from "./models/Player";
+import { ref, watch } from "vue";
 
 const $players = usePlayerList();
+watch($players.getList(), ()=> localStorage.setItem('playerList', JSON.stringify($players.getList())));
 </script>
 
 <template>
@@ -15,7 +17,10 @@ const $players = usePlayerList();
     <div class="text-success">
       <hr class="border border-dark border-1 mt-0" />
     </div>
-    <PlayerList :players="($players.getList() as Player[])" />
+    <PlayerList v-if="($players.getList() as Player[]).length > 0" :players="($players.getList() as Player[])" />
+      <div v-if="($players.getList() as Player[]).length == 0"class="alert alert-success">
+        <p>Add Players to begin.</p>
+      </div>
   </div>
   <Dialog></Dialog>
 </template>

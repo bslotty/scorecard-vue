@@ -3,25 +3,19 @@ import { defineStore } from "pinia";
 import { Player } from "@/models/Player";
 
 export const usePlayerList = defineStore("playerList", () => {
-  let players = ref([
-    new Player("Player A").setScores([Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100)]),
-    new Player("Player B").setScores([Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100)]),
-    new Player("Player C").setScores([Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100)]),
-    new Player("Player D").setScores([Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100), Math.round(Math.random() * 100)]),
-    new Player("Player N").setScores([-333]),
-  ]);
+  let players   = ref( parseJSON( localStorage.getItem("playerList")+"" ) );
 
   function sortList() {
     players.value = players.value.sort((a, b) => b.currentScore - a.currentScore);
   }
 
-  function getList(){
+  function getList() {
     sortList();
-    return players.value
+    return players.value;
   }
 
   function clearPlayers() {
-    players.value = []
+    players.value = [];
   }
 
   function restartMatch() {
@@ -34,6 +28,16 @@ export const usePlayerList = defineStore("playerList", () => {
 
   function remove(player: Player) {
     players.value = players.value.filter((p) => p.id != player.id);
+  }
+
+  function parseJSON(strObj: string): Player[] {
+    let obj = JSON.parse(strObj);
+    if (obj == undefined)
+      return [];
+
+    let players = obj.map( (o:Player) => new Player(o.name).setScores(o.ledger) )
+
+    return players;
   }
 
   return { getList, clearPlayers, restartMatch, add, remove };
